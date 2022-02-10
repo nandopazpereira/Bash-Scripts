@@ -1,0 +1,41 @@
+#!/bin/bash
+                                                  ############ Written by N0z #############
+
+############## Color variables ################
+# sets the ASCII color ecape to a color name.
+black="\033[0;30m"
+dark_gray="\033[1;30m"
+red="\033[0;31m"
+light_red="\033[1;31m"
+green="\033[0;32m"
+light_green="\033[1;32m"
+brown="\033[0;33m"
+yellow="\033[1;33m"
+blue="\033[0;34m"
+light_blue="\033[1;34m"
+purple="\033[0;35m"
+light_purple="\033[1;35m"
+cyan="\033[0;36m"
+light_cyan="\033[1;36m"
+light_gray="\033[0;37m"
+white="\033[1;37m"
+no_color="\033[0m"
+
+# Some cool ASCII Art.
+echo -e "${light_red}                                                                                                                           "
+echo -e "               N0z      N0z    N0z  N0zN0zN0zN0z   N0zN0z          N0z     N0z N0zN0zN0  N0zN0zN0z        N0z    N0zN0zN0zN0z N0zN0zN0z"
+echo -e "            N0z   N0z   N0z    N0z  N0zN0zN0zN0z  N0z  N0z         N0z     N0z N0z    N0 N0z    N0z    N0z   N0z N0zN0zN0zN0z N0z      "
+echo -e "           N0z     N0z  N0z    N0z      N0z      N0z    N0z N0zN0z N0z     N0z N0z    N0 N0z     N0z  N0z     N0z    N0z      N0zN0N0z "
+echo -e "           N0zN0zN0zN0  N0z    N0z      N0z      N0z    N0z N0zN0z N0z     N0z N0zN0zN0  N0z     N0z  N0zN0zN0zN0    N0z      N0zN0N0z "
+echo -e "           N0z      N0  N0z    N0z      N0z       N0z  N0z         N0z     N0z N0z       N0z    N0z   N0z     N0z    N0z      N0z      "
+echo -e "           N0z      N0   N0zN0N0z       N0z        N0zN0z           N0zN0zN0z  N0z       N0zN0zN0z    N0z     N0z    N0z      N0zN0zN0z\n ${white}"
+
+# Start of the script.
+apt-fast -y update && apt-fast -y upgrade;
+
+echo -e "${light_cyan}Update && upgrade finished. Proceeding with clean...\n ${white}";
+
+apt-fast -y clean && echo -e "${light_green}Clean finished. Proceeding with Autoremove...\n ${white}";
+apt-fast -y autoremove &&
+echo -e "${light_green}Autoremove done!\n ${white}";
+echo -e "${light_red}N0z's auto-update script finished. Have an awesome day!";
