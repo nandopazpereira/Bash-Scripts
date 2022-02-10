@@ -1,0 +1,44 @@
+#!/bin/bash
+                                                  ################## Written by N0z ######################
+
+# This script will backup /home, /etc and /opt directories located in your root folder.
+# Afterward it wil append a date to the Backup dir and zip it to be uploaded to a server using FTP.
+# All feedback is welcome and questions will be answered as soon as possible.
+
+# Asigning ANSI escapecodes to a color variable
+green="\033[0;32m"
+white="\033[1;37m"
+light_green="\033[1;32m"
+light_red="\033[1;31m"
+
+echo -e "${green}                                    Hang back while N0z's backup & Upload script does everything for you.${white}\n" &&
+
+# This block will create the backup.
+# An echo will be given if the backup completes succesfully.
+date=$(date +"%Y-%m-%d")
+dir=$"Backup-${date}"
+
+if [ -d /"Backup-$date" ] && echo "${light_red} Backup-$date exists. Skipping backup ${white}"
+then
+sudo rsync -aRAXv /home/* /etc/* /opt/* /"${dir}" 
+else
+echo "${green}Backup-$date does not exist, proceeding with backup${white}"
+break
+fi
+echo -e "${light_green}                               Proceeding with Zip... ${white}\n" &&
+
+# This block takes the directory and zips it. A echo will be given when it completes successfully.
+sudo tar -zcvf //"${dir}".tar.gz /"${dir}"
+echo -e "${light_green}                              Files have been zipped and are ready to upload... ${white}\n"
+
+#This part of the script will upload a copy of the backup directory to the server through FTP
+sudo ftp ftp://USERNAME:PASSWORD@IP_ADDRESS << EOF
+progress
+put /Backup-*.tar.gz
+bye
+EOF
+
+# This will remove the created files.
+sudo rm -r /"${dir}" && sudo rm /"${dir}.tar.gz"
+echo -e "\n"
+echo -e                                              "Upload ${light_green}finished. ${white}Have a nice day!\n"
