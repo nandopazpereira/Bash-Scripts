@@ -3,7 +3,7 @@
 
 ############## Color variables ################
 # sets the ASCII color ecape to a color name.
-black="\033[0;30m"
+black="\033[0;30m" 
 dark_gray="\033[1;30m"
 red="\033[0;31m"
 light_red="\033[1;31m"
