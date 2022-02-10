@@ -2,7 +2,7 @@
                                                   ################## Written by N0z ######################
 
 # This script will backup /home, /etc and /opt directories located in your root folder.
-# Afterward it wil append a date to the Backup dir and zip it to be uploaded to a server using FTP.
+# Afterward it will append the current date to the Backup dir and zip it to be uploaded to a server using FTP.
 # All feedback is welcome and questions will be answered as soon as possible.
 
 # Asigning ANSI escapecodes to a color variable
