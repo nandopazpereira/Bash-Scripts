@@ -33,7 +33,7 @@ sudo tar -zcvf //"${dir}".tar.gz /"${dir}"
 echo -e "${light_green}                              Files have been zipped and are ready to upload... ${white}\n"
 
 #This part of the script will upload a copy of the backup directory to the server through FTP
-sudo ftp ftp://npazpereira:Muw20wag2021\!\!\?@192.168.178.1 << EOF
+sudo ftp ftp://<Username>:<Pasword>@Ip-address << EOF
 progress
 put /Backup-*.tar.gz
 bye
@@ -43,4 +43,3 @@ EOF
 sudo rm -r /"${dir}" && sudo rm /"${dir}.tar.gz"
 echo -e "\n"
 echo -e                                              "Upload ${light_green}finished. ${white}Have a nice day!\n"
-/
