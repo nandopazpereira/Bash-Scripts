@@ -2,7 +2,7 @@
                                                   ################## Written by N0z ######################
 
 # This script will backup /home, /etc and /opt directories located in your root folder.
-# Afterward it will append the current date to the Backup dir and zip it to be uploaded to a server using FTP.
+# Afterward it will append the current date to the Backup directory and zip it to be uploaded to a server using FTP.
 # All feedback is welcome and questions will be answered as soon as possible.
 
 # Asigning ANSI escapecodes to a color variable
@@ -18,11 +18,12 @@ echo -e "${green}                                    Hang back while N0z's backu
 date=$(date +"%Y-%m-%d")
 dir=$"Backup-${date}"
 
-if [ -d /"Backup-$date" ] && echo "${light_red} Backup-$date exists. Skipping backup ${white}"
+if [ -d != /"Backup-$date" ];
 then
-sudo rsync -aRAXv /home/* /etc/* /opt/* /"${dir}" 
+echo "${green}Backup-$date does not exist, proceeding with backup... ${white}";
+sudo rsync -aRAXv /home/* /etc/* /opt/* /"${dir}";
 else
-echo "${green}Backup-$date does not exist, proceeding with backup${white}"
+echo "${light_red} Backup-$date exists. Skipping backup ${white}";
 break
 fi
 echo -e "${light_green}                               Proceeding with Zip... ${white}\n" &&
@@ -32,7 +33,7 @@ sudo tar -zcvf //"${dir}".tar.gz /"${dir}"
 echo -e "${light_green}                              Files have been zipped and are ready to upload... ${white}\n"
 
 #This part of the script will upload a copy of the backup directory to the server through FTP
-sudo ftp ftp://USERNAME:PASSWORD@IP_ADDRESS << EOF
+sudo ftp ftp://npazpereira:Muw20wag2021\!\!\?@192.168.178.1 << EOF
 progress
 put /Backup-*.tar.gz
 bye
@@ -42,3 +43,4 @@ EOF
 sudo rm -r /"${dir}" && sudo rm /"${dir}.tar.gz"
 echo -e "\n"
 echo -e                                              "Upload ${light_green}finished. ${white}Have a nice day!\n"
+/
