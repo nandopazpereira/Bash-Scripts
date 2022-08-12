@@ -1,0 +1,49 @@
+#!/bin/bash
+                                                 ################## Written by N0z ######################
+
+# This script will backup /home, /etc and /opt directories located in your root folder.
+# Afterward it will append the current date to the Backup dir and zip it to be uploaded to a server using expect and SFTP.
+# All feedback is welcome and questions will be answered as soon as possible.
+
+# Asigning ANSI escapecodes to a color variable, to make the terminal output more visible.
+green="\033[0;32m"
+white="\033[1;37m"
+light_green="\033[1;32m"
+light_red="\033[1;31m"
+
+echo -e "${green}                                    Hang back while N0z's backup & Upload script does everything for you.${white}\n"
+
+# This will create the backup if the backupfile does not yet exist.
+# An echo will be given if the backup completes succesfully.
+date=$(date +"%Y-%m-%d")
+dir=$"Backup-${date}"
+
+if [ -d != /"Backup-$date" ];
+then
+echo "${green}Backup-$date does not exist, proceeding with backup... ${white}";
+sudo rsync --progress -aRAX /home/* /etc/* /opt/* /"${dir}";
+else
+echo "${light_red} Backup-$date exists. Skipping backup ${white}";
+break
+fi
+echo -e "${light_green}                              Proceeding with Zip... ${white}\n"
+
+# This block takes the directory and zips it, to optimize preformance and use less space on the disk.
+# A echo will be given when it completes successfully.
+sudo tar -zcvf //"${dir}".tar.gz /"${dir}"
+echo -e "${light_green}                                         Files have been zipped and are ready to be uploaded... ${white}\n"
+
+# This script will upload a copy of the zipped backup directory to the server, through SFTP, using expect.
+# For this to work, make sure you have both scripts in the same directory, or specify the path to sftpupload.sh!
+sudo ~/noz-scripts/sftpupload.sh && echo "\n"
+echo -e "${light_green}                                         SFTP  Upload Finished. ${white}\n"
+
+# Afterward we will remove the created Backup file, located in the root directory.
+# This is to keep the root dir nice and clean.
+sudo rm -r /"${dir}" && sudo rm /"${dir}.tar.gz"
+echo -e "\n"
+echo -e                                                        "Upload ${light_green}finished. ${white}Proceeding with update\n"
+
+#This part is to automatically update the linux system after creating and uploading a backup. (This is still a work in progress... see auto-update script on my github)  
+#sudo ~/noz-scripts/auto-update
+
