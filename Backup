@@ -1,7 +1,7 @@
 #!/bin/bash
                                                  ################## Written by N0z ######################
 
-# This script will backup /home, /etc and /opt directories located in your root folder.
+# This script will backup the /home directory and two files in /etc located in your root folder.
 # Afterward it will append the current date to the Backup dir and zip it to be uploaded to a server using expect and SFTP.
 # All feedback is welcome and questions will be answered as soon as possible.
 
