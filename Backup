@@ -21,7 +21,7 @@ dir=$"Backup-${date}"
 if [ -d != /"Backup-$date" ];
 then
 echo "${green}Backup-$date does not exist, proceeding with backup... ${white}";
-sudo rsync --progress -aRAX /home/* /etc/* /opt/* /"${dir}";
+sudo rsync --progress -aRAX /etc/proxtchains.conf /etc/zsh /home/kali/* /"${dir}";
 else
 echo "${light_red} Backup-$date exists. Skipping backup ${white}";
 break
@@ -30,12 +30,12 @@ echo -e "${light_green}                              Proceeding with Zip... ${wh
 
 # This block takes the directory and zips it, to optimize preformance and use less space on the disk.
 # A echo will be given when it completes successfully.
-sudo tar -zcvf //"${dir}".tar.gz /"${dir}"
+sudo tar -zcvf /"${dir}".tar.gz -C / "${dir}"
 echo -e "${light_green}                                         Files have been zipped and are ready to be uploaded... ${white}\n"
 
 # This script will upload a copy of the zipped backup directory to the server, through SFTP, using expect.
 # For this to work, make sure you have both scripts in the same directory, or specify the path to sftpupload.sh!
-sudo ~/noz-scripts/sftpupload.sh && echo "\n"
+sudo ~/noz-scripts/sftpupload.sh && echo -e "\n"
 echo -e "${light_green}                                         SFTP  Upload Finished. ${white}\n"
 
 # Afterward we will remove the created Backup file, located in the root directory.
